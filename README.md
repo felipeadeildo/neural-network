@@ -85,7 +85,15 @@ where $z_j$ is the input to neuron $N_j$ **before** applying the activation func
 
 #### Biases
 
-_Coming soon_
+Are additional parameters in a neural network that allow the activation function to be shuft left or right. They are added to the weighted sum of the inputs before applying the activation function. This helps the model to learn patterns more effectively by providing an extra degree of freedom.
+
+$$ z_j = \displaystyle \sum_{i} w_{ij} \times a_i + b_j $$
+
+##### Why do we need biases?
+
+By adding a bias term, the activation function can be shifted horizontally. This allow the network to learn and represent paterns that are not centered around the origin. In other workds, biases enabled the adjustment of the activation threshold, without a bias, the neuron can hae a non-zero output even when the inputs are zero.
+
+This **prevents Dead Neurons**!! In activation function like [ReLU](#relu), a bias helps aboid dead neurons (neurons that output zero for all inputs) by ensuring that some neurons are activated even with low input values.
 
 ### Activation Functions
 

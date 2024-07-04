@@ -12,10 +12,13 @@ This repository is part of the coursework for the Introduction to Artificial Int
 - [Weights and Biases](#weights-and-biases)
   - [Weights](#weights)
   - [Biases](#biases)
+    - [Why do we need biases?](#why-do-we-need-biases)
 - [Activation Functions](#activation-functions)
+  - [Why do we need activation functions?](#why-do-we-need-activation-functions)
   - [Sigmoid](#sigmoid)
   - [ReLU](#relu)
   - [Softmax](#softmax)
+  - [Tanh](#tanh)
 - [Forward Propagation](#forward-propagation)
 - [Cost Function](#cost-function)
 - [Backpropagation](#backpropagation)
@@ -97,25 +100,75 @@ This **prevents Dead Neurons**!! In activation function like [ReLU](#relu), a bi
 
 ### Activation Functions
 
-_Coming soon_
+Are mathematical equations that determine the output a neural network model. They **introduce non-linearity into the network, allowing it to learn and model complex patterns in the data**. Without activation functions, a neural network would simply be a linear regression model, unable to capture the intricate structures inherent in most real-world problems.
+
+#### Why do we need activation functions?
+1. **Introduces non-linearity:** Real-world data is often non-linear. Activation functions allow the neural networkd to capture non-linear patterns and relationships in the data.
+2. **Enable Deep Learning:** By stacking multiple layers with non-linear activation functions, the network can learn hierarchical features and deep representations.
+3. **Control Output Range:** Can also help in controlling the output range of neurons, making the network more stable and ensuring that the output are in a desirable range.
+
+The following activation functions are commonly used in neural networks:
 
 #### Sigmoid
 
-The sigmoid function maps any real-valued number into the range (0, 1), making it useful for binary classification.
+The *sigmoid* function maps any real-valued number into the range $\left]0, 1\right[$, making it useful for binary classification.
 
 $$ \sigma(z) = \frac{1}{1 + e^{-z}} $$
 
+![Sigmoid Function Graph](src/img/sigmoid_function.png)
+
+> In logistic regression and binary classification neural networks, the sigmoid function is used in the output layer to predict the probability that an input belongs to a particular class.
+
+**Use Case:**
+- Predicting whether an email is spam or not spam.
+
+A possible implementation can be found [here](https://todo.com/add/here).
+
 #### ReLU
 
-The Rectified Linear Unit (ReLU) function is widely used in hidden layers due to its simplicity and efficiency.
+The *Rectified Linear Unit (ReLU)* function is widely used in hidden layers due to its simplicity and efficiency.
 
 $$ \text{ReLU}(z) = \max(0, z) $$
 
+![ReLU Function Graph](src/img/relu_function.png)
+
+> ReLU is commonly used in hidden layers of deep neural networks because it helps mitigate the vanishing gradient problem, allowing models to learn faster and perform better.
+
+**Use Case:**
+- Image recognition tasks where deep [convolutional neural networks (CNNs)](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) are used.
+
+
+A possible implementation can be found [here](https://todo.com/add/here).
+
+
 #### Softmax
 
-The softmax function converts a vector of values into a probability distribution, often used in the output layer for multi-class classification.
+The *softmax* function converts a vector of values into a probability distribution, often used in the output layer for multi-class classification.
 
 $$ \text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}} $$
+
+![Softmax Function Graph](src/img/softmax_function.png)
+
+> In networks designed for multi-class classification problems, softmax is used in the output layer to represent the probability distribution over multiple classes.
+
+**Use Case:**
+- Handwritten digit recognition (e.g., MNIST dataset) where the network predicts the digit (0-9) in an image.
+
+A possible implementation can be found [here](https://todo.com/add/here).
+
+#### Tanh (Hyperbolic Tangent)
+
+The *tanh* functions maps any real-valued number into the range $\left]-1, 1\right[$. It is a scaled version of the sigmoid function.
+
+$$ \text{Tanh}(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}} $$
+
+![Tanh Function Graph](src/img/tanh_function.png)
+
+> Is often used in hidden layers of neural networks, especially for models dealing with zero-centered data.
+
+
+You can see more a lot of other activation functions [on this Medium Article](https://medium.com/aimonks/a-comprehensive-guide-to-activation-functions-in-deep-learning-ff794f87c184).
+
 
 ### Forward Propagation
 

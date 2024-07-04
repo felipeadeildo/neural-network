@@ -18,7 +18,7 @@ This repository is part of the coursework for the Introduction to Artificial Int
   - [Sigmoid](#sigmoid)
   - [ReLU](#relu)
   - [Softmax](#softmax)
-  - [Tanh](#tanh)
+  - [Tanh](#tanh-hyperbolic-tangent)
 - [Forward Propagation](#forward-propagation)
 - [Cost Function](#cost-function)
 - [Backpropagation](#backpropagation)

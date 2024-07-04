@@ -115,7 +115,9 @@ The *sigmoid* function maps any real-valued number into the range $\left]0, 1\ri
 
 $$ \sigma(z) = \frac{1}{1 + e^{-z}} $$
 
-![Sigmoid Function Graph](src/img/sigmoid_function.png)
+<p align="center">
+  <img src="src/img/sigmoid_function.png" alt="Sigmoid Function Graph" height="300">
+</p>
 
 > In logistic regression and binary classification neural networks, the sigmoid function is used in the output layer to predict the probability that an input belongs to a particular class.
 
@@ -130,7 +132,9 @@ The *Rectified Linear Unit (ReLU)* function is widely used in hidden layers due 
 
 $$ \text{ReLU}(z) = \max(0, z) $$
 
-![ReLU Function Graph](src/img/relu_function.png)
+<p align="center">
+  <img src="src/img/relu_function.png" alt="ReLU Function Graph" height="300">
+</p>
 
 > ReLU is commonly used in hidden layers of deep neural networks because it helps mitigate the vanishing gradient problem, allowing models to learn faster and perform better.
 
@@ -147,7 +151,9 @@ The *softmax* function converts a vector of values into a probability distributi
 
 $$ \text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}} $$
 
-![Softmax Function Graph](src/img/softmax_function.png)
+<p align="center">
+  <img src="src/img/softmax_function.png" alt="Softmax Function Graph" height="300">
+</p>
 
 > In networks designed for multi-class classification problems, softmax is used in the output layer to represent the probability distribution over multiple classes.
 
@@ -162,7 +168,9 @@ The *tanh* functions maps any real-valued number into the range $\left]-1, 1\rig
 
 $$ \text{Tanh}(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}} $$
 
-![Tanh Function Graph](src/img/tanh_function.png)
+<p align="center">
+  <img src="src/img/tanh_function.png" alt="Tanh Function Graph" height="300">
+</p>
 
 > Is often used in hidden layers of neural networks, especially for models dealing with zero-centered data.
 

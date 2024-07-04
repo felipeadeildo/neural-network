@@ -43,7 +43,6 @@ Neurons are the fundamental building blocks of a neural network, functioning as 
 
 Mathematically, a neuron's operation can be expressed as:
 
-
 $$ z = \displaystyle \sum_{i=1}^{n} w_i \times x_i + b $$
 
 where $ z $ is the weighted sum of the inputs plus the bias, each $ w_i $ and $ x_i $ are the weights and input values respectively, and $ b $ is the bias.
@@ -74,7 +73,15 @@ There are three main types of layers in a neural network:
 
 #### Weights
 
-_Coming soon_
+Are numerical values associated with the **connections** between neurons. They determine the strenght of these connections and, in turn, the influence that one neurons's input. Think of weights as the coefficients that adjust the **impact** of incoming data. They can increase or decrease the _importance_ of specific features in the input data.
+
+Weights are fundementally tied to the connections between neurons rather tha the neurons themselves because they **represent how the output of one neuron affects the input of another**. Each wight adjusts the influece of a specific input feature or the output from a previous layer on the next neuron.
+
+In mathematical terms, if we have two neurons $ N_i $ and $ N_j $, with $ N_i $ providing an output $ a_i $ and $ N_j $ receiving this output as an input, the weight $ w_{ij} $ determines how strongly $ a_i $ affects the input to $ N_j $. The weighted sum of inputs into $ N_j $ can be expressed as:
+
+$$ z_j = \displaystyle \sum_{i} w_{ij} \times a_i + b_j $$
+
+where $ z*j $ is the input to neuron $ N_j $ **before** applying the activation function, $ w*{ij} $ is the weight associated with the **connection** from $ N_i $ to $ N_j $, $ a_i $ is the activation (output) of $ N_i $, and $ b_j $ is the bias of the $ N_j $ neuron.
 
 #### Biases
 

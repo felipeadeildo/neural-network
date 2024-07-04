@@ -260,17 +260,7 @@ To represent the entire forward propagation in a single expression, consider the
 
 So, given the notation above, the generalized forward propagation for a neural network with $L$ layers can be expressed as:
 
-$$ \mathbf{A}^{(L)} =
-  \sigma_L \left(
-    \mathbf{W}^{(L)} \sigma_{L-1} \left(
-      \mathbf{W}^{(L-1)} \cdots \sigma_2 \left(
-        \mathbf{W}^{(2)} \sigma_1 \left(
-          \mathbf{W}^{(1)} \mathbf{X} + \mathbf{b}^{(1)} \right)
-        + \mathbf{b}^{(2)} \right)
-      \cdots
-    + \mathbf{b}^{(L-1)} \right)
-  + \mathbf{b}^{(L)} \right)
-$$
+$$ \mathbf{A}^{(L)} = \sigma_L \left( \mathbf{W}^{(L)} \sigma_{L-1} \left( \mathbf{W}^{(L-1)} \cdots \sigma_2 \left( \mathbf{W}^{(2)} \sigma_1 \left( \mathbf{W}^{(1)} \mathbf{X} + \mathbf{b}^{(1)} \right) + \mathbf{b}^{(2)} \right) \cdots + \mathbf{b}^{(L-1)} \right) + \mathbf{b}^{(L)} \right) $$
 
 
 ### Cost Function

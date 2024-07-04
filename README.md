@@ -180,7 +180,98 @@ You can see more a lot of other activation functions [on this Medium Article](ht
 
 ### Forward Propagation
 
-_Coming soon_
+> The things is starting to get complicated.
+
+Forward Propagation is the process by wich data passes through a neural network layer by layer to produce an output. this process involves a series of matrix multiplications and the application of activation functions. Foward propagation is crucial as it allows the neural network to make predictions based on the input data.
+
+<p align="center">
+  <img src="src/img/forward_propagation_architeture.png" alt="Forward Propagation Architeture" height="300">
+</p>
+
+There are two major steps performed in forward propagation techically:
+
+1. **Sum the Product:** This steps involves multiplying the weight vector by the input vector. This operation is repreated for each layer in the netwrodk until the final layer, where a decision is made based on the calculated values.
+
+2. **Activation Functions:** The sum of the product of weights and inputs is passed through an activation function at each layer. The output of one layer becomes de input for the next layer, where it is again multiplied by the weight vector and passed through an activation function. This process continues untul de output layer, where the final output is produced.
+
+<p align="center">
+  <img src="src/img/forward_propagation_example.png" alt="Forward Propagation Architeture" height="300">
+</p>
+
+### Forward Propagation
+
+In the context of neural networks, forward propagation is a crucial process that determines if the assigned weights are suitable for learning the given problem. It involves two primary steps:
+
+1. **Sum the Product:**
+   - This step involves multiplying the weight vector by the input vector. This operation is repeated for each layer in the network until the final layer, where a decision is made based on the calculated values.
+
+2. **Activation Function:**
+   - The sum of the product of weights and inputs is passed through an activation function at each layer. The output of one layer becomes the input for the next layer, where it is again multiplied by the weight vector and passed through an activation function. This process continues until the output layer, where the final output is produced.
+
+
+In a **feedforward neural network**, forward propagation is straightforward to understand. Let's break it down with an example where each layer uses the sigmoid activation function:
+
+- **Input Layer:** $\mathbf{X}$ is the initial input vector.
+
+- **Weights and Biases:** Each layer $l$ has an associated weight vector $\mathbf{W^{(l)}}$ and bias $\mathbf{b^{(l)}}$.
+
+- **Sum of Products:** For each neuron in a layer, the sum of the product of the inputs and weights plus the bias is calculated. For example, if $u_1$ and $u_2$ are the sums in the first hidden layer, so they will be calculated as:
+
+$$ u_1 = \mathbf{W}^{(1)} \mathbf{X} + \mathbf{b}^{(1)} $$
+$$ u_2 = \mathbf{W}^{(2)} \mathbf{A}^{(1)} + \mathbf{b}^{(2)} $$
+
+- **Activation Function:** Each sum $u_i$ is then passed through the sigmoid activation function to produce the activations $a_i$:
+
+$$ a_1 = \sigma(u_1) = \frac{1}{1 + e^{-u_1}} $$
+$$ a_2 = \sigma(u_2) = \frac{1}{1 + e^{-u_2}} $$
+
+- **Output Layer:** The final predicted value $\hat{y}$ is produced after the last activation function is applied:
+
+$$ \hat{y} = \sigma(u_3) $$
+
+
+#### Generalization of Forward Propagation
+
+With this example we can generalize the process to any number of layers and arbitrary activation functions, we can represent the operations mathematically in a compact form.
+
+Let's denote:
+- $\mathbf{L}$ as the number of layers in the network.
+- $n_i$ as the number of neurons in the $i$-th layer.
+- $\mathbf{X}$ as the input vector.
+- $\mathbf{W}^{(l)}$ as the weight matrix connecting layer $l-1$ to layer $l$.
+- $\mathbf{b}^{(l)}$ as the bias vector for layer $l$-th layer.
+- $\mathbf{Z}^{(l)}$ as the sum of products for layer $l$-th layer. (also called pre-activation vector)
+- $\mathbf{A}^{(l)}$ as the activation vector for layer $l$-th layer.
+
+The forward propagation process can be described as follows:
+
+1. **Input Layer (Layer 0):**
+
+$$ \mathbf{A}^{(0)} = \mathbf{X} $$
+
+2. **Hidden Layers and Output Layer (Layer 1 to L):**
+For each $i = 1, 2, \ldots, L$:
+
+$$ \mathbf{Z}^{(i)} = \mathbf{W}^{(i)} \mathbf{A}^{(i-1)} + \mathbf{b}^{(i)} $$
+
+$$ \mathbf{A}^{(i)} = \sigma_i(\mathbf{Z}^{(i)}) $$
+
+To represent the entire forward propagation in a single expression, consider the final output $\mathbf{A}^{(L)}$ as the result of applying all the weights, biases and activation functions from the input to the output layer.
+
+So, given the notation above, the generalized forward propagation for a neural network with $L$ layers can be expressed as:
+
+$$ \mathbf{A}^{(L)} =
+  \sigma_L \left(
+    \mathbf{W}^{(L)} \sigma_{L-1} \left(
+      \mathbf{W}^{(L-1)} \cdots \sigma_2 \left(
+        \mathbf{W}^{(2)} \sigma_1 \left(
+          \mathbf{W}^{(1)} \mathbf{X} + \mathbf{b}^{(1)} \right)
+        + \mathbf{b}^{(2)} \right)
+      \cdots
+    + \mathbf{b}^{(L-1)} \right)
+  + \mathbf{b}^{(L)} \right)
+$$
+
 
 ### Cost Function
 

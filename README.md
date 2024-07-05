@@ -20,7 +20,17 @@ This repository is part of the coursework for the Introduction to Artificial Int
   - [Softmax](#softmax)
   - [Tanh](#tanh-hyperbolic-tangent)
 - [Forward Propagation](#forward-propagation)
+  - [Generalization of Forward Propagation](#generalization-of-forward-propagation)
 - [Cost Function](#cost-function)
+  - [Mean Squared Error](#mean-squared-error-mse)
+  - [Cross-Entropy Loss](#cross-entropy-loss)
+  - [Why do we need cost functions?](#why-do-we-need-cost-functions)
+  - [Example: Using Cross-Entropy Loss in a Neural Network](#example-using-cross-entropy-loss-in-a-neural-network)
+  - [Predicted Probabilities and Actual Labels](#predicted-probabilities-and-actual-labels)
+    - [Notation](#notation)
+    - [Predicted Probabilities ($\hat{\textbf{Y}}$)](#predicted-probabilities-)
+    - [Actual Labels ($\mathbf{Y}$)](#actual-labels-)
+  - [Real Example: Using Cross-Entropy Loss in a Neural Network](#real-example-using-cross-entropy-loss-in-a-neural-network)
 - [Backpropagation](#backpropagation)
 - [Gradient Descent](#gradient-descent)
 - [Training the Neural Network](#training-the-neural-network)
@@ -255,7 +265,190 @@ $$ \mathbf{A}^{(L)} = \sigma_L \left( \mathbf{W}^{(L)} \sigma_{L-1} \left( \math
 
 ### Cost Function
 
-_Coming soon_
+Also known as the loss function or error function, measures how well the neural network's predictions match the actual target values. It quentifies the difference between the predicted outputs and the true outputs, guiding the optimization process during training.
+
+The following cost functions are commonly used in neural networks:
+
+#### Mean Squared Error (MSE)
+
+Is commonly used for regression problems. It calculates the average of the squared differences between the predicted and actual values.
+
+$$ \textbf{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 $$
+
+where $n$ is the number of training examples, $\hat{y}_i$ is the predicted value, and $y_i$ is the actual value for the $i$-th training example.
+
+An implementation can be found [here](https://todo.com/add/here).
+
+#### Cross-Entropy Loss
+Also known as Log Loss, is widely used for classification probelms. It measures the difference between two probability distributions: the predicted distribution and the true distribution.
+
+$$ \textbf{Cross-Entropy Loss} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{c} y_{ij} \log(\hat{y}_{ij}) $$
+
+where $n$ is the number of training examples, $\hat{y}_{ij}$ is the predicted probability of the $i$-th training example belonging to the $j$-th class, $y_{ij}$ is the actual probability for the $i$-th training example belonging to the $j$-th class, and $c$ is the number of classes.
+
+An implementation can be found [here](https://todo.com/add/here).
+
+#### Why do we need cost functions?
+During the neural network training process, the goal is to minimize the const function. This is achieved trhough optimization algorithms like gradient descent, wich iterativewly adjust the network's weights and biases to reduce the cost function. The lower the cost function, the better the network's performance (predictions match the actual target values).
+
+#### Example: Using Cross-Entropy Loss in a Neural Network
+Consider a Neural Network with the following structure:
+
+- **Input Layer:** $\textbf{X}$.
+- **Weights and Biases:** $\textbf{W}^{(l)}$ and $\textbf{b}^{(l)}$ for each layer $l$.
+- **Activation Functions:** $\sigma^{(l)}$ for each layer $l$.
+- **Output Layer:** Produces predicted probabilities $\hat{\textbf{Y}}$.
+
+So we apply the foward propagation process:
+1. **Input Layer:**
+
+$$ \textbf{A}^{(0)} = \textbf{X} $$
+
+2. **Hidden Layers:**
+For each $l = 1, 2, \ldots, L - 1$:
+
+$$ \textbf{Z}^{(l)} = \textbf{W}^{(l)} \textbf{A}^{(l-1)} + \textbf{b}^{(l)} $$
+
+$$ \textbf{A}^{(l)} = \sigma^{(l)} \left( \textbf{Z}^{(l)} \right) $$
+
+3. **Output Layer:**
+
+$$ \hat{\textbf{Y}} = \textbf{A}^{(L)} = \textbf{softmax} \left( \textbf{Z}^{(L)} \right) =  \textbf{softmax} \left( \textbf{W}^{(L)} \textbf{A}^{(L-1)} + \textbf{b}^{(L)} \right) $$
+
+Now, given the predicted probabilities $\hat{\textbf{Y}}$ and the actual probabilities (labels) $\textbf{Y}$, we can calculate the cost function:
+
+$$ \textbf{Cross-Entropy Loss} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{c} y_{ij} \log(\hat{y}_{ij}) $$
+
+#### Predicted Probabilities and Actual Labels
+In the context of neural networks, especially for classification tasks, the predicted probabilities and actual labels can be represented as vectors or matrices, depending on the type of classification problem (binary or multi-class).
+
+##### Notation
+
+- $i$: Represents the index of the input example, ranging from 1 to $m$, where $m$ is the total number of examples in the dataset.
+- $j$: Represents the index of the class, ranging from 1 to $c$, where $c$ is the total number of classes.
+- $y_{ij}$: Represents the actual label of the $i$-th example for the $j$-th class. It is 1 if the example belongs to the class, and 0 otherwise in the case of one-hot encoding.
+- $\hat{y}_{ij}$: Represents the predicted probability of the $i$-th example belonging to the $j$-th class.
+
+##### Predicted Probabilities ($\hat{\textbf{Y}}$)
+Are the outputs of a neural network after applying the activation function in the output layer (typically [sotfmax](#softmax) for multi-class classification). These probabilities indicate the likelihood of each input beloging to each possible class.
+
+- **Binary Classification:** The predicted probabilities for a binary classification problem can be represented as a vector, where each element corresponds to the probability of the input belonging to the positive class.
+
+$$ \hat{\mathbf{Y}} = [\hat{y}_1, \hat{y}_2, \ldots, \hat{y}_m] $$
+
+where $\hat{y}_i$ is the predicted probability for the $i$-th example.
+
+- **Multi-Class Classification:** The predicted probabilities for a multi-class classification problem are represented as a matrix, where each row corresponds to an input example and each column corresponds to a class.
+$$
+\hat{\mathbf{Y}} =
+\begin{bmatrix}
+  \hat{y}_{11} & \hat{y}_{12} & \ldots & \hat{y}_{1c} \\
+  \hat{y}_{21} & \hat{y}_{22} & \ldots & \hat{y}_{2c} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \hat{y}_{m1} & \hat{y}_{m2} & \ldots & \hat{y}_{mc}
+\end{bmatrix}
+$$
+
+where $\hat{y}_{ij}$ is the predicted probability of the $i$-th example belonging to the $j$-th class.
+
+##### Actual Labels ($\mathbf{Y}$)
+
+The actual labels are the ground truth values that indicate the true class of each input example. These can also be represented as vectors or matrices, depending on the problem.
+
+- **Binary Classification:** The actual labels for binary classification can be represented as a vector, where each element is either 0 or 1, indicating the class of each example.
+
+$$ \mathbf{Y} = [y_1, y_2, \ldots, y_m] $$
+
+where $y_i$ is the actual label for the $i$-th example (0 or 1).
+
+- **Multi-Class Classification:** The actual labels for multi-class classification are typically represented as a one-hot encoded matrix, where each row corresponds to an input example and each column corresponds to a class. Each element in the matrix is either 0 or 1.
+$$
+\mathbf{Y} = \begin{bmatrix}
+  y_{11} & y_{12} & \ldots & y_{1c} \\
+  y_{21} & y_{22} & \ldots & y_{2c} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  y_{m1} & y_{m2} & \ldots & y_{mc}
+\end{bmatrix}
+$$
+  where $y_{ij}$ is 1 if the $i$-th example belongs to the $j$-th class, and 0 otherwise.
+
+#### Real Example: Using Cross-Entropy Loss in a Neural Network
+
+For a dataset with 3 examples and 4 classes, the predicted probabilities and actual labels could be represented as follows:
+
+- **Predicted Probabilities ($\hat{\mathbf{Y}}$):**
+
+$$
+\hat{\mathbf{Y}} = \begin{bmatrix}
+  0.1 & 0.5 & 0.2 & 0.2 \\
+  0.3 & 0.4 & 0.2 & 0.1 \\
+  0.2 & 0.3 & 0.4 & 0.1
+\end{bmatrix}
+$$
+
+
+- **Actual Labels ($\mathbf{Y}$):**
+
+$$
+\mathbf{Y} = \begin{bmatrix}
+  0 & 1 & 0 & 0 \\
+  1 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 0
+\end{bmatrix}
+$$
+
+- **Cross-Entropy Loss Calculation:**
+
+Using the matrices above, the cross-entropy loss for multi-class classification is calculated as:
+
+$$
+\text{Cross-Entropy Loss} = -\frac{1}{3} \sum_{i=1}^{3} \sum_{j=1}^{4} y_{ij} \log(\hat{y}_{ij})
+$$
+
+This formulation ensures that the loss function measures how well the predicted probabilities match the actual labels, guiding the optimization process to improve the neural network's performance.
+
+<details>
+
+<summary>Expanded Calculation</summary>
+
+Expanding the sums, we get:
+
+For the first example ($i = 1$):
+
+$$ \text{Loss}_1 = - \left( 0 \log(0.1) + 1 \log(0.5) + 0 \log(0.2) + 0 \log(0.2) \right) = - \log(0.5) $$
+
+For the second example ($i = 2$):
+
+$$ \text{Loss}_2 = - \left( 1 \log(0.3) + 0 \log(0.4) + 0 \log(0.2) + 0 \log(0.1) \right) = - \log(0.3) $$
+
+For the third example ($i = 3$):
+
+$$ \text{Loss}_3 = - \left( 0 \log(0.2) + 0 \log(0.3) + 1 \log(0.4) + 0 \log(0.1) \right) = - \log(0.4) $$
+
+The average cross-entropy loss is then:
+
+$$ \text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0.4) \right) $$
+
+Breaking it down step by step:
+
+- First Example Loss Calculation:
+
+$$ \text{Loss}_1 = - (0 \cdot \log(0.1) + 1 \cdot \log(0.5) + 0 \cdot \log(0.2) + 0 \cdot \log(0.2)) = - \log(0.5) $$
+
+- Second Example Loss Calculation:
+
+$$ \text{Loss}_2 = - (1 \cdot \log(0.3) + 0 \cdot \log(0.4) + 0 \cdot \log(0.2) + 0 \cdot \log(0.1)) = - \log(0.3) $$
+
+- Third Example Loss Calculation:
+
+$$ \text{Loss}_3 = - (0 \cdot \log(0.2) + 0 \cdot \log(0.3) + 1 \cdot \log(0.4) + 0 \cdot \log(0.1)) = - \log(0.4) $$
+
+Finally, combine these to compute the overall average cross-entropy loss:
+
+$$ \text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0.4) \right) $$
+
+This expanded calculation demonstrates how the cross-entropy loss measures the difference between the predicted probabilities and the actual labels, guiding the optimization process to improve the neural network's performance.
+</details>
 
 ### Backpropagation
 

@@ -28,8 +28,8 @@ This repository is part of the coursework for the Introduction to Artificial Int
   - [Example: Using Cross-Entropy Loss in a Neural Network](#example-using-cross-entropy-loss-in-a-neural-network)
   - [Predicted Probabilities and Actual Labels](#predicted-probabilities-and-actual-labels)
     - [Notation](#notation)
-    - [Predicted Probabilities ($\hat{\textbf{Y}}$)](#predicted-probabilities-)
-    - [Actual Labels ($\mathbf{Y}$)](#actual-labels-)
+    - [Predicted Probabilities ($`\hat{\textbf{Y}}`$)](#predicted-probabilities-hattextbfy)
+    - [Actual Labels ($`\mathbf{Y}`$)](#actual-labels-mathbfy)
   - [Real Example: Using Cross-Entropy Loss in a Neural Network](#real-example-using-cross-entropy-loss-in-a-neural-network)
 - [Backpropagation](#backpropagation)
 - [Gradient Descent](#gradient-descent)
@@ -284,7 +284,7 @@ Also known as Log Loss, is widely used for classification probelms. It measures 
 
 $$ \textbf{Cross-Entropy Loss} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{c} y_{ij} \log(\hat{y}_{ij}) $$
 
-where $n$ is the number of training examples, $\hat{y}_{ij}$ is the predicted probability of the $i$-th training example belonging to the $j$-th class, $y_{ij}$ is the actual probability for the $i$-th training example belonging to the $j$-th class, and $c$ is the number of classes.
+where $n$ is the number of training examples, $`\hat{y}_{ij}`$ is the predicted probability of the $i$-th training example belonging to the $j$-th class, $y_{ij}$ is the actual probability for the $i$-th training example belonging to the $j$-th class, and $c$ is the number of classes.
 
 An implementation can be found [here](https://todo.com/add/here).
 
@@ -339,15 +339,15 @@ $$ \hat{\mathbf{Y}} = [\hat{y}_1, \hat{y}_2, \ldots, \hat{y}_m] $$
 where $\hat{y}_i$ is the predicted probability for the $i$-th example.
 
 - **Multi-Class Classification:** The predicted probabilities for a multi-class classification problem are represented as a matrix, where each row corresponds to an input example and each column corresponds to a class.
-$$
-\hat{\mathbf{Y}} =
-\begin{bmatrix}
+
+```math
+\hat{\mathbf{Y}} = \begin{bmatrix}
   \hat{y}_{11} & \hat{y}_{12} & \ldots & \hat{y}_{1c} \\
   \hat{y}_{21} & \hat{y}_{22} & \ldots & \hat{y}_{2c} \\
   \vdots & \vdots & \ddots & \vdots \\
   \hat{y}_{m1} & \hat{y}_{m2} & \ldots & \hat{y}_{mc}
 \end{bmatrix}
-$$
+```
 
 where $\hat{y}_{ij}$ is the predicted probability of the $i$-th example belonging to the $j$-th class.
 
@@ -362,14 +362,15 @@ $$ \mathbf{Y} = [y_1, y_2, \ldots, y_m] $$
 where $y_i$ is the actual label for the $i$-th example (0 or 1).
 
 - **Multi-Class Classification:** The actual labels for multi-class classification are typically represented as a one-hot encoded matrix, where each row corresponds to an input example and each column corresponds to a class. Each element in the matrix is either 0 or 1.
-$$
+
+```math
 \mathbf{Y} = \begin{bmatrix}
   y_{11} & y_{12} & \ldots & y_{1c} \\
   y_{21} & y_{22} & \ldots & y_{2c} \\
   \vdots & \vdots & \ddots & \vdots \\
   y_{m1} & y_{m2} & \ldots & y_{mc}
 \end{bmatrix}
-$$
+```
   where $y_{ij}$ is 1 if the $i$-th example belongs to the $j$-th class, and 0 otherwise.
 
 #### Real Example: Using Cross-Entropy Loss in a Neural Network
@@ -415,37 +416,37 @@ Expanding the sums, we get:
 
 For the first example ($i = 1$):
 
-$$ \text{Loss}_1 = - \left( 0 \log(0.1) + 1 \log(0.5) + 0 \log(0.2) + 0 \log(0.2) \right) = - \log(0.5) $$
+$$\text{Loss}_1 = - \left( 0 \log(0.1) + 1 \log(0.5) + 0 \log(0.2) + 0 \log(0.2) \right) = - \log(0.5)$$
 
 For the second example ($i = 2$):
 
-$$ \text{Loss}_2 = - \left( 1 \log(0.3) + 0 \log(0.4) + 0 \log(0.2) + 0 \log(0.1) \right) = - \log(0.3) $$
+$$\text{Loss}_2 = - \left( 1 \log(0.3) + 0 \log(0.4) + 0 \log(0.2) + 0 \log(0.1) \right) = - \log(0.3)$$
 
 For the third example ($i = 3$):
 
-$$ \text{Loss}_3 = - \left( 0 \log(0.2) + 0 \log(0.3) + 1 \log(0.4) + 0 \log(0.1) \right) = - \log(0.4) $$
+$$\text{Loss}_3 = - \left( 0 \log(0.2) + 0 \log(0.3) + 1 \log(0.4) + 0 \log(0.1) \right) = - \log(0.4)$$
 
 The average cross-entropy loss is then:
 
-$$ \text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0.4) \right) $$
+$$\text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0.4) \right)$$
 
 Breaking it down step by step:
 
 - First Example Loss Calculation:
 
-$$ \text{Loss}_1 = - (0 \cdot \log(0.1) + 1 \cdot \log(0.5) + 0 \cdot \log(0.2) + 0 \cdot \log(0.2)) = - \log(0.5) $$
+$$\text{Loss}_1 = - (0 \cdot \log(0.1) + 1 \cdot \log(0.5) + 0 \cdot \log(0.2) + 0 \cdot \log(0.2)) = - \log(0.5)$$
 
 - Second Example Loss Calculation:
 
-$$ \text{Loss}_2 = - (1 \cdot \log(0.3) + 0 \cdot \log(0.4) + 0 \cdot \log(0.2) + 0 \cdot \log(0.1)) = - \log(0.3) $$
+$$\text{Loss}_2 = - (1 \cdot \log(0.3) + 0 \cdot \log(0.4) + 0 \cdot \log(0.2) + 0 \cdot \log(0.1)) = - \log(0.3)$$
 
 - Third Example Loss Calculation:
 
-$$ \text{Loss}_3 = - (0 \cdot \log(0.2) + 0 \cdot \log(0.3) + 1 \cdot \log(0.4) + 0 \cdot \log(0.1)) = - \log(0.4) $$
+$$\text{Loss}_3 = - (0 \cdot \log(0.2) + 0 \cdot \log(0.3) + 1 \cdot \log(0.4) + 0 \cdot \log(0.1)) = - \log(0.4)$$
 
 Finally, combine these to compute the overall average cross-entropy loss:
 
-$$ \text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0.4) \right) $$
+$$\text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0.4) \right)$$
 
 This expanded calculation demonstrates how the cross-entropy loss measures the difference between the predicted probabilities and the actual labels, guiding the optimization process to improve the neural network's performance.
 </details>

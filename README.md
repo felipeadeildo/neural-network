@@ -198,16 +198,6 @@ There are two major steps performed in forward propagation techically:
   <img src="src/img/forward_propagation_example.png" alt="Forward Propagation Architeture" height="300">
 </p>
 
-### Forward Propagation
-
-In the context of neural networks, forward propagation is a crucial process that determines if the assigned weights are suitable for learning the given problem. It involves two primary steps:
-
-1. **Sum the Product:**
-   - This step involves multiplying the weight vector by the input vector. This operation is repeated for each layer in the network until the final layer, where a decision is made based on the calculated values.
-
-2. **Activation Function:**
-   - The sum of the product of weights and inputs is passed through an activation function at each layer. The output of one layer becomes the input for the next layer, where it is again multiplied by the weight vector and passed through an activation function. This process continues until the output layer, where the final output is produced.
-
 
 In a **feedforward neural network**, forward propagation is straightforward to understand. Let's break it down with an example where each layer uses the sigmoid activation function:
 

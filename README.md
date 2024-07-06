@@ -36,7 +36,7 @@ This repository is part of the coursework for the Introduction to Artificial Int
   - [Gradient Descent](#gradient-descent)
   - [Geometric Interpretation](#geometric-interpretation)
   - [Animated Examples](#animated-examples)
-- [How $\theta$ looks like$](#how--looks-like)
+- [How $`\theta`$ looks like](#how-theta-looks-like)
   - [Example: Flattening the parameters](#example-flattening-the-parameters)
 - [Backpropagation](#backpropagation)
 - [Training the Neural Network](#training-the-neural-network)

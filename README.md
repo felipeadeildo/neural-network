@@ -31,8 +31,12 @@ This repository is part of the coursework for the Introduction to Artificial Int
     - [Predicted Probabilities ($`\hat{\textbf{Y}}`$)](#predicted-probabilities-hattextbfy)
     - [Actual Labels ($`\mathbf{Y}`$)](#actual-labels-mathbfy)
   - [Real Example: Using Cross-Entropy Loss in a Neural Network](#real-example-using-cross-entropy-loss-in-a-neural-network)
+- [Gradient and Gradient Descent](#gradient-and-gradient-descent)
+  - [Gradient](#gradient)
+  - [Gradient Descent](#gradient-descent)
+  - [Geometric Interpretation](#geometric-interpretation)
+  - [Animated Examples](#animated-examples)
 - [Backpropagation](#backpropagation)
-- [Gradient Descent](#gradient-descent)
 - [Training the Neural Network](#training-the-neural-network)
 - [Epochs](#epochs)
 - [Example with Digit Recognition](#example-with-digit-recognition)
@@ -451,11 +455,78 @@ $$\text{Cross-Entropy Loss} = -\frac{1}{3} \left( \log(0.5) + \log(0.3) + \log(0
 This expanded calculation demonstrates how the cross-entropy loss measures the difference between the predicted probabilities and the actual labels, guiding the optimization process to improve the neural network's performance.
 </details>
 
+
+### Gradient and Gradient Descent
+
+In this section, we will delve into the concepts of the gradient, gradient descent, and their geometric interpretation. Understanding these concepts is crucial for grasping how neural networks are optimized during training.
+
+#### Gradient
+
+The gradient of a function is a vector that contains all the partial derivatives of the function with respect to its input variables. **It points in the direction of the steepest ascent of the function**.
+
+For a function $f(x_1, x_2, \ldots, x_n)$, the gradient $\nabla f$ is given by:
+
+$$ \nabla f = \left( \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n} \right)$$
+
+The gradient vector provides the **direction and rate of the fastest increase** of the function. In the context of neural networks, the cost function $\mathcal{L}(\mathbf{\theta})$ depends on the parameters $\mathbf{\theta}$ (weights and biases), and the gradient of $\mathcal{L}$ with respect to $\mathbf{\theta}$ is used to update these parameters to minimize the cost function.
+
+#### Gradient Descent
+
+Gradient descent is **an optimization algorithm** used to **minimize a function by iteratively moving in the direction of the steepest descent**, as defined by the negative of the gradient.
+
+The update rule for gradient descent is:
+
+$$ \mathbf{\theta} \leftarrow \mathbf{\theta} - \alpha \nabla \mathcal{L}(\mathbf{\theta}) $$
+
+where:
+- $\mathbf{\theta}$ represents the parameters of the model (weights and biases).
+- $\alpha$ is the learning rate, a small positive number that controls the step size.
+- $\nabla \mathcal{L}(\mathbf{\theta})$ is the gradient of the cost function with respect to the parameters.
+
+#### Geometric Interpretation
+
+Geometrically, the gradient points in the direction of the steepest ascent of the function, and the negative gradient points in the direction of the steepest descent. By following the negative gradient, we move towards the minimum of the function.
+
+For example, consider a simple quadratic function $f(x, y) = x^2 + y^2$:
+
+- The gradient of $f$ is $\nabla f = (2x, 2y)$.
+- The negative gradient is $-\nabla f = (-2x, -2y)$.
+
+Starting from an initial point $(x_0, y_0)$, we update the point using gradient descent:
+
+$$ x \leftarrow x - \alpha \cdot 2x $$
+$$ y \leftarrow y - \alpha \cdot 2y $$
+
+This iterative process moves the point towards the origin, which is the minimum of the function.
+
+#### Animated Examples
+
+The following animations illustrate the concept of gradient descent:
+
+1. $f(x) = x^2$: A classical example of the gradient descent algorithm in a 1D function.
+
+<p align="center">
+  <img src="src/img/gradient_descent_animation_square_function.gif" alt="Gradient Descent 1D Plot" height="450">
+</p>
+
+2. $f(x) = \sin(x)$: An animation demonstrating the iterative process of gradient descent on $\sin$ function.
+
+<p align="center">
+  <img src="src/img/gradient_descent_animation_sin.gif" alt="Gradient Descent Sin" height="450">
+</p>
+
+3. $f(x, y) = \sin \left( \frac{1}{2} x^2 - \frac{1}{4}y^2 + 3 \right) \cos \left( 2x + 1 - e^y \right)$: An animation demonstrating the iterative process of gradient descent on the multivariable function $f$ where the domain is a surface.
+
+<p align="center">
+  <img src="src/img/gradient_descent_animation_multivar.gif" alt="Gradient Descent Sin" height="450">
+</p>
+
+
+> Animation credits: [Kaggle](https://www.kaggle.com/code/trolukovich/animating-gradien-descent).
+
+> TODO: Show how looks like the $\theta$ param.
+
 ### Backpropagation
-
-_Coming soon_
-
-### Gradient Descent
 
 _Coming soon_
 

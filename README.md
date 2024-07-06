@@ -39,6 +39,9 @@ This repository is part of the coursework for the Introduction to Artificial Int
 - [How $`\theta`$ looks like](#how-theta-looks-like)
   - [Example: Flattening the parameters](#example-flattening-the-parameters)
 - [Backpropagation](#backpropagation)
+  - [Intuition Behind Backpropagation](#intuition-behind-backpropagation)
+  - [Mathematical Formulation](#mathematical-formulation)
+  - [Intuition Behind the Steps](#intuition-behind-the-steps)
 - [Training the Neural Network](#training-the-neural-network)
 - [Epochs](#epochs)
 - [Example with Digit Recognition](#example-with-digit-recognition)
@@ -587,7 +590,90 @@ By flattening the parameters into a single vector, we simplify the application o
 
 ### Backpropagation
 
-_Coming soon_
+Backpropagation is a fundamental algorithm used for training neural networks. It efficiently **computes the gradient of the loss function** with respect to each weight by using the chain rule, allowing the network to update its weights and biases through gradient descent. Here's a detailed explanation of the backpropagation process:
+
+#### Intuition Behind Backpropagation
+
+The **main goal** of backpropagation is to **minimize the loss function by adjusting the weights and biases of the network**. During forward propagation, the input data passes through the network, layer by layer, to generate the output. The loss function then measures how far the network's predictions are from the actual target values. Backpropagation works by propagating the error backward through the network to update the weights and biases, reducing the overall error.
+
+#### Mathematical Formulation
+
+Consider a neural network with an input layer, one hidden layer, and an output layer. Let's denote:
+- $\mathbf{X}$ as the input vector.
+- $\mathbf{W}^{(1)}$ and $\mathbf{b}^{(1)}$ as the weights and biases for the hidden layer.
+- $\mathbf{W}^{(2)}$ and $\mathbf{b}^{(2)}$ as the weights and biases for the output layer.
+- $\mathbf{A}^{(1)}$ as the activation from the hidden layer.
+- $\mathbf{A}^{(2)}$ as the activation from the output layer.
+- $\mathbf{Z}^{(1)}$ and $\mathbf{Z}^{(2)}$ as the pre-activation values for the hidden and output layers, respectively.
+
+1. **Forward Propagation:**
+
+The forward propagation steps are as follows:
+
+$$\mathbf{Z}^{(1)} = \mathbf{W}^{(1)} \mathbf{X} + \mathbf{b}^{(1)}$$
+
+$$\mathbf{A}^{(1)} = \sigma(\mathbf{Z}^{(1)})$$
+
+$$\mathbf{Z}^{(2)} = \mathbf{W}^{(2)} \mathbf{A}^{(1)} + \mathbf{b}^{(2)}$$
+
+$$\mathbf{A}^{(2)} = \text{softmax}(\mathbf{Z}^{(2)})$$
+
+2. **Compute Loss:**
+
+The loss (e.g., cross-entropy loss) is computed as:
+
+$$\mathcal{L} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{c} y_{ij} \log(\hat{y}_{ij})$$
+
+3. **Backward Propagation:**
+
+Backpropagation involves calculating the gradient of the loss function with respect to each parameter (weights and biases) in the network.
+
+- **Output Layer:**
+
+Calculate the error term for the output layer:
+
+$$\delta^{(2)} = \mathbf{A}^{(2)} - \mathbf{Y}$$
+
+Calculate the gradients for $\mathbf{W}^{(2)}$ and $\mathbf{b}^{(2)}$:
+
+
+$$\nabla_{\mathbf{W}^{(2)}} \mathcal{L} = \frac{1}{n} \delta^{(2)} (\mathbf{A}^{(1)})^T$$
+
+$$\nabla_{\mathbf{b}^{(2)}} \mathcal{L} = \frac{1}{n} \sum_{i=1}^{n} \delta^{(2)}_i$$
+
+- **Hidden Layer:**
+
+Calculate the error term for the hidden layer using the chain rule:
+
+$$\delta^{(1)} = (\mathbf{W}^{(2)})^T \delta^{(2)} \odot \sigma'(\mathbf{Z}^{(1)})$$
+
+Calculate the gradients for $\mathbf{W}^{(1)}$ and $\mathbf{b}^{(1)}$:
+
+
+$$\nabla_{\mathbf{W}^{(1)}} \mathcal{L} = \frac{1}{n} \delta^{(1)} \mathbf{X}^T$$
+
+$$\nabla_{\mathbf{b}^{(1)}} \mathcal{L} = \frac{1}{n} \sum_{i=1}^{n} \delta^{(1)}_i$$
+
+4. **Update Parameters:**
+
+Update the weights and biases using gradient descent:
+
+$$\mathbf{W}^{(1)} \leftarrow \mathbf{W}^{(1)} - \alpha \nabla_{\mathbf{W}^{(1)}} \mathcal{L}$$
+
+
+$$\mathbf{b}^{(1)} \leftarrow \mathbf{b}^{(1)} - \alpha \nabla_{\mathbf{b}^{(1)}} \mathcal{L}$$
+
+
+$$\mathbf{W}^{(2)} \leftarrow \mathbf{W}^{(2)} - \alpha \nabla_{\mathbf{W}^{(2)}} \mathcal{L}$$
+
+$$\mathbf{b}^{(2)} \leftarrow \mathbf{b}^{(2)} - \alpha \nabla_{\mathbf{b}^{(2)}} \mathcal{L}$$
+
+### Intuition Behind the Steps
+
+- **Forward Propagation:** Compute the activations for each layer by applying weights, biases, and activation functions. This step generates predictions from the input data.
+- **Compute Loss:** Measure the difference between the predicted outputs and the actual target values using a loss function.
+- **Backward Propagation:** Compute the gradients of the loss function with respect to each parameter in the network by propagating the error backward. This involves calculating the error at each layer and how it changes with respect to the weights and biases.
+- **Update Parameters:** Adjust the weights and biases using the computed gradients to minimize the loss function. This step iteratively reduces the error, improving the network's performance.
 
 ### Training the Neural Network
 

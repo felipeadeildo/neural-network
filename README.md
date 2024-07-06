@@ -46,6 +46,7 @@ This repository is part of the coursework for the Introduction to Artificial Int
 - [Epochs](#epochs)
 - [Example with Digit Recognition](#example-with-digit-recognition)
 - [Conclusion](#conclusion)
+- [References](#references)
 
 ---
 
@@ -668,25 +669,69 @@ $$\mathbf{W}^{(2)} \leftarrow \mathbf{W}^{(2)} - \alpha \nabla_{\mathbf{W}^{(2)}
 
 $$\mathbf{b}^{(2)} \leftarrow \mathbf{b}^{(2)} - \alpha \nabla_{\mathbf{b}^{(2)}} \mathcal{L}$$
 
-### Intuition Behind the Steps
+#### Intuition Behind the Steps
 
 - **Forward Propagation:** Compute the activations for each layer by applying weights, biases, and activation functions. This step generates predictions from the input data.
 - **Compute Loss:** Measure the difference between the predicted outputs and the actual target values using a loss function.
 - **Backward Propagation:** Compute the gradients of the loss function with respect to each parameter in the network by propagating the error backward. This involves calculating the error at each layer and how it changes with respect to the weights and biases.
 - **Update Parameters:** Adjust the weights and biases using the computed gradients to minimize the loss function. This step iteratively reduces the error, improving the network's performance.
 
+
 ### Training the Neural Network
 
-_Coming soon_
+Training a neural network involves iteratively updating its weights and biases to minimize the loss function. This process can be broken down into several key steps:
+
+1. **Initialization:** Set the initial values of the weights and biases, typically using small random numbers.
+
+2. **Forward Propagation:** Pass the input data through the network to compute the output.
+
+3. **Compute Loss:** Calculate the loss using the chosen loss function, which measures the difference between the predicted and actual values.
+
+4. **Backward Propagation:** Compute the gradients of the loss with respect to each weight and bias by propagating the error backward through the network.
+
+5. **Update Parameters:** Adjust the weights and biases using the computed gradients and a learning rate, which controls the step size.
+
+6. **Repeat:** Repeat the above steps for a specified number of iterations or until the loss converges to a satisfactory level.
+
+An implementation of the neural network training process can be found [here](https://todo.com/add/here).
 
 ### Epochs
 
-_Coming soon_
+An epoch is one complete pass through the entire training dataset. During training, multiple epochs are typically required to minimize the loss function and improve the network's performance. Each epoch allows the network to learn from the entire dataset, adjusting the weights and biases iteratively.
+
+- **Number of Epochs:** The number of epochs is a hyperparameter that needs to be chosen carefully. Too few epochs may result in underfitting, where the model has not learned enough from the data. Too many epochs may lead to overfitting, where the model performs well on training data but poorly on unseen data.
+
+- **Monitoring Training:** During training, it's essential to monitor the loss and other metrics to determine if the network is improving. Plotting the loss against the number of epochs can help visualize the training process and identify potential issues such as overfitting or underfitting.
 
 ### Example with Digit Recognition
 
-_Coming soon_
+To illustrate the concepts discussed, let's consider an example of training a neural network to recognize handwritten digits from the MNIST dataset. The MNIST dataset contains 60,000 training images and 10,000 test images, where each image is a 28x28 grayscale pixel representation of a digit from 0 to 9.
+
+1. **Data Preprocessing:**
+   - Normalize the pixel values to be between 0 and 1.
+   - Flatten each image into a vector of length 784 (28x28).
+   - One-hot encode the labels.
+
+2. **Network Architecture:**
+   - Input layer: 784 neurons (one for each pixel).
+   - Hidden layer: 128 neurons with ReLU activation.
+   - Output layer: 10 neurons with softmax activation (one for each digit class).
+
+3. **Training Process:**
+   - Initialize weights and biases.
+   - Use cross-entropy loss.
+   - Use gradient descent optimization.
+   - Train for a specified number of epochs.
+
+The implementation can be found [here](https://todo.com/add/here).
 
 ### Conclusion
 
-_Coming soon_
+In this project, we built a neural network from scratch, implementing fundamental components such as neurons, activation functions, forward propagation, backpropagation, and gradient descent. By constructing the network without high-level libraries, we gained a deep understanding of the theoretical and mathematical foundations of neural networks. This project serves as a comprehensive guide for anyone looking to grasp the intricacies of neural networks and their practical implementation.
+
+Through this journey, we've seen how neural networks can learn complex patterns from data, adjust their parameters to minimize error, and ultimately make accurate predictions. This foundational knowledge is essential for advancing in the field of artificial intelligence and machine learning, providing a strong base for exploring more advanced topics and architectures.
+
+
+### References
+
+__Comming Soon__

@@ -19,7 +19,7 @@ class DenseLayer:
         self,
         input_size: int,
         output_size: int,
-        activation: Literal["sigmoid", "relu", "tanh"],
+        activation: Literal["sigmoid", "relu", "tanh", "softmax"],
     ) -> None:
         """
         Initialize a dense layer.
@@ -27,17 +27,25 @@ class DenseLayer:
         Args:
             input_size (int): Number of input features.
             output_size (int): Number of neurons in the layer.
-            activation (str): Activation function to use ('sigmoid', 'relu', 'tanh').
+            activation (str): Activation function to use ('sigmoid', 'relu', 'tanh', 'softmax').
 
         Raises:
             ValueError: If an unsupported activation function is specified.
         """
         # Initialize weights and biases
-        self.W: np.ndarray = np.random.randn(output_size, input_size) * 0.01
+        if activation == "relu":
+            self.W: np.ndarray = np.random.randn(output_size, input_size) * np.sqrt(
+                2.0 / input_size
+            )
+        else:
+            self.W: np.ndarray = np.random.randn(output_size, input_size) * 0.01
         self.b: np.ndarray = np.zeros((output_size, 1))
 
+        self.activation_name = activation
         self.activation = getattr(ActivationFunctions, activation)
-        self.activation_derivative = getattr(Derivatives, f"{activation}_derivative")
+        self.activation_derivative = getattr(
+            Derivatives, f"{activation}_derivative", None
+        )
 
     def forward(self, A_prev: np.ndarray) -> np.ndarray:
         """
@@ -65,7 +73,11 @@ class DenseLayer:
         Returns:
             np.ndarray: Gradient of the cost with respect to the activation of the previous layer.
         """
-        dZ = dA * self.activation_derivative(self.Z)
+        if self.activation_name != "softmax":
+            dZ = dA * self.activation_derivative(self.Z)  # type: ignore
+        else:
+            dZ = dA  # Softmax handled separately in loss function
+
         dW = np.dot(dZ, self.A_prev.T) / self.A_prev.shape[1]
         db = np.sum(dZ, axis=1, keepdims=True) / self.A_prev.shape[1]
         dA_prev = np.dot(self.W.T, dZ)

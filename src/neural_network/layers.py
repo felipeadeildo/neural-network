@@ -7,6 +7,14 @@ from .derivatives import Derivatives
 
 
 class DenseLayer:
+    """
+    Dense Layer class to perform forward and backward propagation for a single dense layer.
+
+    Methods:
+        forward(self, A_prev)
+        backward(self, dA, learning_rate)
+    """
+
     def __init__(
         self,
         input_size: int,

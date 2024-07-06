@@ -7,6 +7,15 @@ from .layers import DenseLayer
 
 
 class NeuralNetwork:
+    """
+    Neural Network class to perform forward and backward propagation.
+
+    Methods:
+        forward(self, X)
+        backward(self, Y_hat, Y)
+        train(self, X, Y, epochs)
+    """
+
     def __init__(self, layers: List[DenseLayer], learning_rate: float = 0.01) -> None:
         """
         Initialize the neural network.

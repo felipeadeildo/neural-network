@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "neural-network"
+version = "0.1.0"
+description = "A neural network from scratch without high-level libraries"
+authors = ["Felipe Adeildo <felipeadeildo@duck.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^2.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

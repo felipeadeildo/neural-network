@@ -36,6 +36,8 @@ This repository is part of the coursework for the Introduction to Artificial Int
   - [Gradient Descent](#gradient-descent)
   - [Geometric Interpretation](#geometric-interpretation)
   - [Animated Examples](#animated-examples)
+- [How $\theta$ looks like$](#how--looks-like)
+  - [Example: Flattening the parameters](#example-flattening-the-parameters)
 - [Backpropagation](#backpropagation)
 - [Training the Neural Network](#training-the-neural-network)
 - [Epochs](#epochs)
@@ -524,7 +526,64 @@ The following animations illustrate the concept of gradient descent:
 
 > Animation credits: [Kaggle](https://www.kaggle.com/code/trolukovich/animating-gradien-descent).
 
-> TODO: Show how looks like the $\theta$ param.
+### How $\theta$ Looks Like
+
+In a neural network, the parameters (weights and biases) for each layer are represented as matrices and vectors. To apply gradient descent efficiently, these parameters are often **flattened into a single vector $\mathbf{\theta}$**. This allows for easy computation and updates.
+
+#### Example: Flattening the parameters
+
+Consider a simple neural network with one hidden layer:
+- **Input layer**: 3 neurons
+- **Hidden layer**: 4 neurons
+- **Output layer**: 2 neurons
+
+The weights and biases are as follows:
+- $\mathbf{W}^{(1)}$: Weight matrix from the input layer to the hidden layer (4x3)
+- $\mathbf{b}^{(1)}$: Bias vector for the hidden layer (4x1)
+- $\mathbf{W}^{(2)}$: Weight matrix from the hidden layer to the output layer (2x4)
+- $\mathbf{b}^{(2)}$: Bias vector for the output layer (2x1)
+
+So, the parameters $\mathbf{\theta}$ can be represented as follows:
+
+1. **Weights for the first layer (\(\mathbf{W}^{(1)}\))**:
+
+$$\mathbf{W}^{(1)} = \begin{bmatrix}
+w_{11}^{(1)} & w_{12}^{(1)} & w_{13}^{(1)} \\
+w_{21}^{(1)} & w_{22}^{(1)} & w_{23}^{(1)} \\
+w_{31}^{(1)} & w_{32}^{(1)} & w_{33}^{(1)} \\
+w_{41}^{(1)} & w_{42}^{(1)} & w_{43}^{(1)}
+\end{bmatrix}$$
+
+2. **Biases for the first layer (\(\mathbf{b}^{(1)}\))**:
+
+$$\mathbf{b}^{(1)} = \begin{bmatrix}
+b_{1}^{(1)} \\
+b_{2}^{(1)} \\
+b_{3}^{(1)} \\
+b_{4}^{(1)}
+\end{bmatrix}$$
+
+3. **Weights for the second layer (\(\mathbf{W}^{(2)}\))**:
+
+$$\mathbf{W}^{(2)} = \begin{bmatrix}
+w_{11}^{(2)} & w_{12}^{(2)} & w_{13}^{(2)} & w_{14}^{(2)} \\
+w_{21}^{(2)} & w_{22}^{(2)} & w_{23}^{(2)} & w_{24}^{(2)}
+\end{bmatrix}$$
+
+4. **Biases for the second layer (\(\mathbf{b}^{(2)}\))**:
+
+$$\mathbf{b}^{(2)} = \begin{bmatrix}
+b_{1}^{(2)} \\
+b_{2}^{(2)}
+\end{bmatrix}$$
+
+The flattened parameter vector $\mathbf{\theta}$ is created by concatenating all the flattened weight matrices and bias vectors:
+
+$$\mathbf{\theta} = \begin{bmatrix}
+w_{11}^{(1)}, w_{12}^{(1)}, w_{13}^{(1)}, w_{21}^{(1)}, w_{22}^{(1)}, w_{23}^{(1)}, w_{31}^{(1)}, w_{32}^{(1)}, w_{33}^{(1)}, w_{41}^{(1)}, w_{42}^{(1)}, w_{43}^{(1)}, b_{1}^{(1)}, b_{2}^{(1)}, b_{3}^{(1)}, b_{4}^{(1)}, w_{11}^{(2)}, w_{12}^{(2)}, w_{13}^{(2)}, w_{14}^{(2)}, w_{21}^{(2)}, w_{22}^{(2)}, w_{23}^{(2)}, w_{24}^{(2)}, b_{1}^{(2)}, b_{2}^{(2)}
+\end{bmatrix}$$
+
+By flattening the parameters into a single vector, we simplify the application of gradient descent and other optimization algorithms, making the training process more efficient and easier to implement.
 
 ### Backpropagation
 

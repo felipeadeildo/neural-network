@@ -545,7 +545,7 @@ The weights and biases are as follows:
 
 So, the parameters $\mathbf{\theta}$ can be represented as follows:
 
-1. **Weights for the first layer (\(\mathbf{W}^{(1)}\))**:
+1. **Weights for the first layer $(\mathbf{W}^{(1)})$**:
 
 $$\mathbf{W}^{(1)} = \begin{bmatrix}
 w_{11}^{(1)} & w_{12}^{(1)} & w_{13}^{(1)} \\
@@ -554,7 +554,7 @@ w_{31}^{(1)} & w_{32}^{(1)} & w_{33}^{(1)} \\
 w_{41}^{(1)} & w_{42}^{(1)} & w_{43}^{(1)}
 \end{bmatrix}$$
 
-2. **Biases for the first layer (\(\mathbf{b}^{(1)}\))**:
+2. **Biases for the first layer $(\mathbf{b}^{(1)})$**:
 
 $$\mathbf{b}^{(1)} = \begin{bmatrix}
 b_{1}^{(1)} \\
@@ -563,14 +563,14 @@ b_{3}^{(1)} \\
 b_{4}^{(1)}
 \end{bmatrix}$$
 
-3. **Weights for the second layer (\(\mathbf{W}^{(2)}\))**:
+3. **Weights for the second layer $(\mathbf{W}^{(2)})$**:
 
 $$\mathbf{W}^{(2)} = \begin{bmatrix}
 w_{11}^{(2)} & w_{12}^{(2)} & w_{13}^{(2)} & w_{14}^{(2)} \\
 w_{21}^{(2)} & w_{22}^{(2)} & w_{23}^{(2)} & w_{24}^{(2)}
 \end{bmatrix}$$
 
-4. **Biases for the second layer (\(\mathbf{b}^{(2)}\))**:
+4. **Biases for the second layer $(\mathbf{b}^{(2)})$**:
 
 $$\mathbf{b}^{(2)} = \begin{bmatrix}
 b_{1}^{(2)} \\

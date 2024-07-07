@@ -27,7 +27,10 @@ class CostFunctions:
             float: Cross-Entropy Loss.
         """
         n = y.shape[1]  # number of examples
-        cost = -1 / n * np.sum(y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat))
+        epsilon = 1e-15  # small value to avoid log(0)
+        cost = (-1 / n) * np.sum(
+            y * np.log(y_hat + epsilon) + (1 - y) * np.log(1 - y_hat + epsilon)
+        )
 
         return float(np.squeeze(cost))  # squeeze removes dimensions of size 1
 

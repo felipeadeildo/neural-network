@@ -63,7 +63,7 @@ class ActivationFunctions:
         Returns:
             np.ndarray: Softmax of the input.
         """
-        exp_z = np.exp(z - np.max(z))
+        exp_z = np.exp(z - np.max(z, axis=0, keepdims=True))
         return exp_z / exp_z.sum(axis=0, keepdims=True)
 
     @staticmethod

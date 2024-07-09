@@ -1,13 +1,6 @@
-from .activation_functions import ActivationFunctions
-from .cost_functions import CostFunctions
-from .derivatives import Derivatives
+from .activations import ACTIVATIONS
+from .costs import COSTS
 from .layers import DenseLayer
-from .neural_network import NeuralNetwork
+from .network import NeuralNetwork
 
-__all__ = [
-    "ActivationFunctions",
-    "CostFunctions",
-    "Derivatives",
-    "DenseLayer",
-    "NeuralNetwork",
-]
+__all__ = ["NeuralNetwork", "DenseLayer", "ACTIVATIONS", "COSTS"]

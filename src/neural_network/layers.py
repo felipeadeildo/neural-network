@@ -2,8 +2,7 @@ from typing import Literal
 
 import numpy as np
 
-from .activation_functions import ActivationFunctions
-from .derivatives import Derivatives
+from .activations import ACTIVATIONS
 
 
 class DenseLayer:
@@ -28,26 +27,21 @@ class DenseLayer:
             input_size (int): Number of input features.
             output_size (int): Number of neurons in the layer.
             activation (str): Activation function to use ('sigmoid', 'relu', 'tanh', 'softmax').
-
-        Raises:
-            ValueError: If an unsupported activation function is specified.
         """
-        # Initialize weights and biases
+        self.input_size = input_size
+        self.output_size = output_size
+        self.activation = ACTIVATIONS[activation]
+
+        # Initialize weights and biases with He initialization for ReLU, normal for others
         if activation == "relu":
-            self.W: np.ndarray = np.random.randn(output_size, input_size) * np.sqrt(
+            self.weights = np.random.randn(output_size, input_size) * np.sqrt(
                 2.0 / input_size
             )
         else:
-            self.W: np.ndarray = np.random.randn(output_size, input_size) * 0.01
-        self.b: np.ndarray = np.zeros((output_size, 1))
+            self.weights = np.random.randn(output_size, input_size) * 0.01
+        self.biases = np.zeros((output_size, 1))
 
-        self.activation_name = activation
-        self.activation = getattr(ActivationFunctions, activation)
-        self.activation_derivative = getattr(
-            Derivatives, f"{activation}_derivative", None
-        )
-
-    def forward(self, A_prev: np.ndarray) -> np.ndarray:
+    def forward(self, input_data: np.ndarray) -> np.ndarray:
         """
         Perform forward propagation through the layer.
 
@@ -57,31 +51,29 @@ class DenseLayer:
         Returns:
             np.ndarray: Activations after applying the activation function.
         """
-        self.A_prev: np.ndarray = A_prev
-        self.Z: np.ndarray = np.dot(self.W, A_prev) + self.b
-        self.A: np.ndarray = self.activation(self.Z)
-        return self.A
+        self.input_data = input_data
+        self.z = np.dot(self.weights, input_data) + self.biases
+        self.a = self.activation(self.z)
+        return self.a
 
     def backward(self, dA: np.ndarray, learning_rate: float) -> np.ndarray:
         """
         Perform backward propagation through the layer.
 
         Args:
-            dA (np.ndarray): Gradient of the cost with respect to the activation.
+            dA (np.ndarray): Gradient of the cost/loss with respect to the output.
             learning_rate (float): Learning rate for updating parameters.
 
         Returns:
-            np.ndarray: Gradient of the cost with respect to the activation of the previous layer.
+            np.ndarray: Gradient of the cost/loss with respect to the activation of the previous layer. (input)
         """
-        if self.activation_name != "softmax":
-            dZ = dA * self.activation_derivative(self.Z)  # type: ignore
-        else:
-            dZ = dA  # Softmax handled separately in loss function
+        m = self.input_data.shape[1]
+        dZ = dA * self.activation(self.z, derivative=True)
+        dW = np.dot(dZ, self.input_data.T) / m
+        dB = np.sum(dZ, axis=1, keepdims=True) / m
+        dA_prev = np.dot(self.weights.T, dZ)
 
-        dW = np.dot(dZ, self.A_prev.T) / self.A_prev.shape[1]
-        db = np.sum(dZ, axis=1, keepdims=True) / self.A_prev.shape[1]
-        dA_prev = np.dot(self.W.T, dZ)
+        self.weights -= learning_rate * dW
+        self.biases -= learning_rate * dB
 
-        self.W -= learning_rate * dW
-        self.b -= learning_rate * db
         return dA_prev

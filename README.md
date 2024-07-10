@@ -144,7 +144,7 @@ $$ \sigma(z) = \frac{1}{1 + e^{-z}} $$
 **Use Case:**
 - Predicting whether an email is spam or not spam.
 
-A possible implementation can be found [here](https://todo.com/add/here).
+A possible implementation can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/src/neural_network/activations.py#L6-L28).
 
 #### ReLU
 
@@ -162,7 +162,7 @@ $$ \text{ReLU}(z) = \max(0, z) $$
 - Image recognition tasks where deep [convolutional neural networks (CNNs)](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) are used.
 
 
-A possible implementation can be found [here](https://todo.com/add/here).
+A possible implementation can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/src/neural_network/activations.py#L31-L52).
 
 
 #### Softmax
@@ -180,7 +180,7 @@ $$ \text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j} e^{z_j}} $$
 **Use Case:**
 - Handwritten digit recognition (e.g., MNIST dataset) where the network predicts the digit (0-9) in an image.
 
-A possible implementation can be found [here](https://todo.com/add/here).
+A possible implementation can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/src/neural_network/activations.py#L55-L76).
 
 #### Tanh (Hyperbolic Tangent)
 
@@ -287,7 +287,7 @@ $$ \textbf{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 $$
 
 where $n$ is the number of training examples, $\hat{y}_i$ is the predicted value, and $y_i$ is the actual value for the $i$-th training example.
 
-An implementation can be found [here](https://todo.com/add/here).
+An implementation can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/src/neural_network/costs.py#L34-L62).
 
 #### Cross-Entropy Loss
 Also known as Log Loss, is widely used for classification probelms. It measures the difference between two probability distributions: the predicted distribution and the true distribution.
@@ -296,7 +296,7 @@ $$ \textbf{Cross-Entropy Loss} = - \frac{1}{n} \sum_{i=1}^{n} \sum_{j=1}^{c} y_{
 
 where $n$ is the number of training examples, $`\hat{y}_{ij}`$ is the predicted probability of the $i$-th training example belonging to the $j$-th class, $y_{ij}$ is the actual probability for the $i$-th training example belonging to the $j$-th class, and $c$ is the number of classes.
 
-An implementation can be found [here](https://todo.com/add/here).
+An implementation can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/src/neural_network/costs.py#L6-L31).
 
 #### Why do we need cost functions?
 During the neural network training process, the goal is to minimize the const function. This is achieved trhough optimization algorithms like gradient descent, wich iterativewly adjust the network's weights and biases to reduce the cost function. The lower the cost function, the better the network's performance (predictions match the actual target values).
@@ -693,7 +693,7 @@ Training a neural network involves iteratively updating its weights and biases t
 
 6. **Repeat:** Repeat the above steps for a specified number of iterations or until the loss converges to a satisfactory level.
 
-An implementation of the neural network training process can be found [here](https://todo.com/add/here).
+An implementation of the neural network training process can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/src/neural_network/network.py#L83-L124).
 
 ### Epochs
 
@@ -723,7 +723,7 @@ To illustrate the concepts discussed, let's consider an example of training a ne
    - Use gradient descent optimization.
    - Train for a specified number of epochs.
 
-The implementation can be found [here](https://todo.com/add/here).
+The implementation can be found [here](https://github.com/felipeadeildo/neural-network/blob/main/digit-recognizer.ipynb).
 
 ### Conclusion
 
